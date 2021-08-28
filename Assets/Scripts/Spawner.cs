@@ -11,6 +11,13 @@ public class Spawner : MonoBehaviour
     [SerializeField] private float forceStrengh = 20f;
     private float timer = 0f;
 
+    private SoundManager soundManager;
+
+    private void Start()
+    {
+        soundManager = SoundManager.instance;
+    }
+
     private void Update()
     {
         timer += Time.deltaTime;
@@ -25,6 +32,8 @@ public class Spawner : MonoBehaviour
     private void Spawn()
     {
         GameObject sphere = Instantiate(spherePrefab, spawnPosition, Quaternion.identity);
+
+        soundManager.PlaySound("Laser");
 
         Vector3 force = new Vector3(Random.Range(-forceStrengh, forceStrengh), 
             Random.Range(-forceStrengh, forceStrengh), Random.Range(-forceStrengh, forceStrengh));
